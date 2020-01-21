@@ -57,13 +57,14 @@ player_action = ""
 while player_action is not 'q':
     print(f"Welcome to the adventure, {player_one.name}")
     print(f"Current Room: {player_one.current_room.name}")
-    print(f"Current Room Description {player_one.current_room.description}")
-    player_action = input(f"Where do you want to go, {player_one.name}? Or press q to quit")
+    print(f"Current Room Description: {player_one.current_room.description}")
+    player_action = input(f"Where do you want to go, {player_one.name}? Or press q to quit. ")
+    current_room_name = player_one.current_room.name
 
 '''
     if player_action == 'n' or 's' or 'e' or 'w':
         print(f'You have chosen to go {player_action}')
-        if player_action == 'n' and player_one.current_room.n_to != None:
+        if player_action == 'n' and room[current].n_to != None:
             player_one.current_room = player_one.current_room.n_to
         elif player_one == 's' and player_one.current_room.s_to != None:
             player_one.current_room = player_one.current_room.s_to
