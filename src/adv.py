@@ -39,7 +39,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player_one = Player("Samwise the Brave", "outside")
+player_one = Player("Samwise the Brave", room["outside"])
 
 # Write a loop that:
 #
@@ -51,7 +51,25 @@ player_one = Player("Samwise the Brave", "outside")
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-selection = ""
+player_action = ""
 
-while selection is not 'q':
-    selection = input(f"Where do you want to go, {player_one.name}? Or press q to quit")
+
+while player_action is not 'q':
+    print(f"Welcome to the adventure, {player_one.name}")
+    print(f"Current Room: {player_one.current_room.name}")
+    print(f"Current Room Description {player_one.current_room.description}")
+    player_action = input(f"Where do you want to go, {player_one.name}? Or press q to quit")
+
+'''
+    if player_action == 'n' or 's' or 'e' or 'w':
+        print(f'You have chosen to go {player_action}')
+        if player_action == 'n' and player_one.current_room.n_to != None:
+            player_one.current_room = player_one.current_room.n_to
+        elif player_one == 's' and player_one.current_room.s_to != None:
+            player_one.current_room = player_one.current_room.s_to
+        elif player_one == 'e' and player_one.current_room.e_to != None:
+            player_one.current_room = player_one.current_room.e_to
+        elif player_one == 'w' and player_one.current_room.w_to != None:
+            player_one.current_room = player_one.current_room.w_to
+'''
+

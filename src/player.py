@@ -1,5 +1,6 @@
 # Write a class to hold player information, e.g. what room they are in
 # currently.
+from room import Room
 
 class Player:
     def __init__(self, name, current_room):
@@ -8,4 +9,9 @@ class Player:
 
     def __str__(self):
         return f"Player: {self.name} Current Room: {self.current_room}"
+    
+    # Fix later; add move method?
+    def move(self):
+
+        pass
 
