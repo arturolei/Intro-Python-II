@@ -10,7 +10,18 @@ class Player:
     def __str__(self):
         return f"Player: {self.name} Current Room: {self.current_room}"
     
-    # Fix later; add move method?
+    # Fix later; add move method
+
+    # Get room info. 
+    def get_room(self):
+        return self.current_room
+
+    # Set current room. 
+    def set_room(self, new_room):
+        self.current_room = new_room 
+
+
+
     def move(self):
 
         pass

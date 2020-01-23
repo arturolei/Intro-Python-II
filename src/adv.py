@@ -39,7 +39,8 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player_one = Player("Samwise the Brave", room["outside"])
+# I am passing the key to the dictionary
+player_one = Player("Samwise the Brave", "outside")
 
 # Write a loop that:
 #
@@ -53,24 +54,21 @@ player_one = Player("Samwise the Brave", room["outside"])
 # If the user enters "q", quit the game.
 player_action = ""
 
+current_room_name = player_one.current_room
+print(f"Welcome to the adventure, {player_one.name}")
+
+print(f"Current Room Description: {room[current_room_name].description}")
+
 
 while player_action is not 'q':
-    print(f"Welcome to the adventure, {player_one.name}")
-    print(f"Current Room: {player_one.current_room.name}")
-    print(f"Current Room Description: {player_one.current_room.description}")
-    player_action = input(f"Where do you want to go, {player_one.name}? Or press q to quit. ")
-    current_room_name = player_one.current_room.name
+ 
 
-'''
-    if player_action == 'n' or 's' or 'e' or 'w':
-        print(f'You have chosen to go {player_action}')
-        if player_action == 'n' and room[current].n_to != None:
-            player_one.current_room = player_one.current_room.n_to
-        elif player_one == 's' and player_one.current_room.s_to != None:
-            player_one.current_room = player_one.current_room.s_to
-        elif player_one == 'e' and player_one.current_room.e_to != None:
-            player_one.current_room = player_one.current_room.e_to
-        elif player_one == 'w' and player_one.current_room.w_to != None:
-            player_one.current_room = player_one.current_room.w_to
-'''
+
+    print("Testing room shape", room[current_room_name].n_to)
+
+    player_action = input(f"Where do you want to go, {player_one.name}? Or press q to quit. ")
+    
+  
+    
+
 
