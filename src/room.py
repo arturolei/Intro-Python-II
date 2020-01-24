@@ -31,9 +31,11 @@ class Room:
         return self.items
 
     def show_items(self):
+        item_list=""
         if len(self.items) > 0:
             for item in self.items:
-                print(item)
+                item_list += f"{item.get_name()}, Description: {item.get_description()} \n"
+        return item_list
 
     def set_items(self, new_items_list): # Initializes all items in room
         self.items = new_items_list

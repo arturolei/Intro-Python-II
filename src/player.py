@@ -23,5 +23,16 @@ class Player:
     def set_room(self, new_room):
         self.current_room = new_room 
 
-    def pick_up(self,new_item):
+    # Get pick up item
+    def pickup_item(self,new_item):
         self.items.append(new_item)
+
+    # Get list of items a player has
+    def get_items(self):
+        if len(self.items) == 0:
+            return f"You got nothing, {self.name}!"
+        items_list = f"Here is what you have, {self.name}: \n"
+        for item in self.items:
+            items_list += f"{item.get_name()}, Description: {item.get_description()} \n"
+
+        return items_list
