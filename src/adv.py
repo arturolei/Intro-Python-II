@@ -68,31 +68,34 @@ while player_action is not 'q':
     
     if player_action in legitmate_moves:
 
-        if player_action == 'n' and hasattr(current_room, 'n_to'):
+        if player_action == 'n' and current_room.n_to != None: # Test room is real and player direction
             player_one.set_room(current_room.n_to)
             current_room = player_one.get_room()
-            print(f"You are now in {player_one.get_room().name}")
+            print(f"You are now in {player_one.get_room().get_name()}")
+            print(f"Room Description: {current_room.description}")
 
-        elif player_action == 's' and hasattr(current_room, 's_to'):
+        elif player_action == 's' and current_room.s_to != None:
             player_one.set_room(current_room.s_to)
             current_room = player_one.get_room()
             print(f"You are now in {player_one.get_room().name}")
         
-        elif player_action == 'e' and hasattr(current_room, 'e_to'):
+        elif player_action == 'e' and current_room.e_to != None:
             player_one.set_room(current_room.e_to)
             current_room = player_one.get_room()
             print(f"You are now in {player_one.get_room().name}")
 
-        elif player_action == 'w' and hasattr(current_room, 'w_to'):
+        elif player_action == 'w' and current_room.w_to != None:
             player_one.set_room(current_room.w_to)
             current_room = player_one.get_room()
             print(f"You are now in {player_one.get_room().name}")
         
         else:
-            print("Nowhere to go; illegitimate move.")
-    else:
+            print("ERROR: You can't go there! Illegitimate move.")
+    elif player_action is not 'q':
         print("Not an acceptable input command")
 
+# Print when out of loop and player has quit the game.
+print("Goodbye! Thanks for playing!")
 
     
   
