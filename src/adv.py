@@ -126,7 +126,14 @@ while player_action is not 'q':
 
     elif player_action.split()[0] in legitimate_actions:
         item_requested = player_action.split()[1]
-        player_one.pickup_item(current_room.on_take(item_requested))
+        if player_action.split()[0] == 'get' or player_action.split()[0] == 'take':
+            player_one.pickup_item(current_room.on_take(item_requested))
+        else:
+            current_room.on_drop(player_one.drop_item(item_requested))
+            print(f"{current_room.get_name()} currently contains: ")
+            print(current_room.show_items())
+
+        #Show current inventory
         print(player_one.get_items())
     
     elif player_action is not 'q':

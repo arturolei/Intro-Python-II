@@ -25,7 +25,21 @@ class Player:
 
     # Get pick up item
     def pickup_item(self,new_item):
-        self.items.append(new_item)
+        if new_item != None:
+            self.items.append(new_item)
+        else:
+            print("You cannot take what is not there.")
+
+    # Drop item 
+    def drop_item(self,dropped_item_name):
+        item_list = [item.name for item in self.items]
+        if dropped_item_name not in item_list:
+            return None
+        else:
+            dropped_item = self.items[item_list.index(dropped_item_name)]
+            self.items.remove(dropped_item)
+            print(f"Dropping {dropped_item.get_name()}")
+            return dropped_item
 
     # Get list of items a player has
     def get_items(self):
@@ -33,6 +47,6 @@ class Player:
             return f"You got nothing, {self.name}!"
         items_list = f"\nHere is what you have, {self.name}: \n"
         for item in self.items:
-            items_list += f"{item.get_name()}, Description: {item.get_description()} \n"
+            items_list += f"{item} \n"
 
         return items_list

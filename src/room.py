@@ -53,9 +53,19 @@ class Room:
     def on_take(self, requested_item_name):
         item_list = [item.get_name() for item in self.items]
         if requested_item_name in item_list:
-            print(f"You pick up the following item: {requested_item_name}")
+            print(f"You have picked up {requested_item_name}")
             item_taken = self.items[item_list.index(requested_item_name)]
             self.items.remove(item_taken)
             return item_taken
         else:
-            print("You cannot have what doesn't exist")
+            return None
+
+
+    #on_drop 
+    def on_drop(self, dropped_item):
+        if dropped_item != None:
+            print(f"You have dropped: {dropped_item.get_name()} \n")
+            self.items.append(dropped_item)
+        else:
+            print("You cannot drop what you don't have!")
+   
