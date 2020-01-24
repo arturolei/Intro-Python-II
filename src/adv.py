@@ -40,7 +40,7 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 # I am passing the key to the dictionary
-player_one = Player("Samwise the Brave", "outside")
+player_one = Player("Samwise the Brave", room["outside"])
 
 # Write a loop that:
 #
@@ -54,19 +54,46 @@ player_one = Player("Samwise the Brave", "outside")
 # If the user enters "q", quit the game.
 player_action = ""
 
-current_room_name = player_one.current_room
+current_room = player_one.get_room()
+
 print(f"Welcome to the adventure, {player_one.name}")
 
-print(f"Current Room Description: {room[current_room_name].description}")
+print(f"Current Room Description: {current_room.description}")
 
+legitmate_moves = ['n', 's', 'e', 'w']
 
 while player_action is not 'q':
  
+    player_action = input(f"What do you want to do, {player_one.name}? Or press q to quit. ")
+    
+    if player_action in legitmate_moves:
+
+        if player_action == 'n' and hasattr(current_room, 'n_to'):
+            player_one.set_room(current_room.n_to)
+            current_room = player_one.get_room()
+            print(f"You are now in {player_one.get_room().name}")
+
+        elif player_action == 's' and hasattr(current_room, 's_to'):
+            player_one.set_room(current_room.s_to)
+            current_room = player_one.get_room()
+            print(f"You are now in {player_one.get_room().name}")
+        
+        elif player_action == 'e' and hasattr(current_room, 'e_to'):
+            player_one.set_room(current_room.e_to)
+            current_room = player_one.get_room()
+            print(f"You are now in {player_one.get_room().name}")
+
+        elif player_action == 'w' and hasattr(current_room, 'w_to'):
+            player_one.set_room(current_room.w_to)
+            current_room = player_one.get_room()
+            print(f"You are now in {player_one.get_room().name}")
+        
+        else:
+            print("Nowhere to go; illegitimate move.")
+    else:
+        print("Not an acceptable input command")
 
 
-    print("Testing room shape", room[current_room_name].n_to)
-
-    player_action = input(f"Where do you want to go, {player_one.name}? Or press q to quit. ")
     
   
     
