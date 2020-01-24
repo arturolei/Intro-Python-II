@@ -10,7 +10,7 @@ class Item:
         return self.description
 
     def __str__(self):
-        print(f"Name: {self.name},  Description: {self.description}")
+        return f"Item name: {self.name},  Item Description: {self.description}"
 
     # I do not think we will need setters here (players can't change items
     # but it might be good to have this--maybe wizards can change items' attributes

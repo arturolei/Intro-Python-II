@@ -31,7 +31,7 @@ class Player:
     def get_items(self):
         if len(self.items) == 0:
             return f"You got nothing, {self.name}!"
-        items_list = f"Here is what you have, {self.name}: \n"
+        items_list = f"\nHere is what you have, {self.name}: \n"
         for item in self.items:
             items_list += f"{item.get_name()}, Description: {item.get_description()} \n"
 

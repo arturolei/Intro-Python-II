@@ -71,7 +71,7 @@ The `/src` directory contains the files `adv.py`, which is where the main logic 
   also be a `list` of items "in" the player, similar to how `Item`s can be in a
   `Room`.
 
-* Add a new type of sentence the parser can understand: two words.
+* [x] Add a new type of sentence the parser can understand: two words.
 
   * Until now, the parser could just understand one sentence form:
 

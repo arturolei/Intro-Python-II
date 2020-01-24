@@ -29,13 +29,33 @@ class Room:
     ## Methods Relating to Items in the Room:
     def get_items(self):
         return self.items
+    
+    # let's you set all the items in a room, useful for when you want to populate a room
+    def set_items(self, new_items_list): 
+        self.items = new_items_list
 
+    #Shows you items in a room. 
     def show_items(self):
+        if len(self.items) == 0:
+            return "There's nothing here.\n"
+        
         item_list=""
         if len(self.items) > 0:
             for item in self.items:
-                item_list += f"{item.get_name()}, Description: {item.get_description()} \n"
+                item_list += f"{item} \n"
         return item_list
+    
+    # when you get a take or get request from player, e.g. "get matches"
+    # 1) Check item exists in items in room. 
+    # 2) If it exists pass it to the requester 
+    # 3) Alter contents
 
-    def set_items(self, new_items_list): # Initializes all items in room
-        self.items = new_items_list
+    def on_take(self, requested_item_name):
+        item_list = [item.get_name() for item in self.items]
+        if requested_item_name in item_list:
+            print(f"You pick up the following item: {requested_item_name}")
+            item_taken = self.items[item_list.index(requested_item_name)]
+            self.items.remove(item_taken)
+            return item_taken
+        else:
+            print("You cannot have what doesn't exist")

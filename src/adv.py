@@ -44,8 +44,15 @@ initial_treasure_room_items = [
 initial_outside_items =[Item('pinecone', "It's a pinecone. Not very fresh."),
     Item('brochure', "It's a brochure about the rooms; there is a map.")]
 
+initial_foyer_items = [Item('umbrella', "An umbrella left behind by someone visiting on a rainy day"),
+    Item('helmet', "It's an old rusty helmet"),
+    Item('shoe', "It's an old shoe that's seen better days."),
+    Item('poster', "It's a cheap printed map of the region.")]
+
 room['treasure'].set_items(initial_treasure_room_items)
 room['outside'].set_items(initial_outside_items)
+room['foyer'].set_items(initial_foyer_items)
+
 
 
 #
@@ -70,14 +77,16 @@ player_action = ""
 
 current_room = player_one.get_room()
 
-print(f"Welcome to the adventure, {player_one.name}")
+print(f"Welcome to the adventure, {player_one.get_name()} \n")
 
-print(f"Current Room Description: {current_room.description}")
+print(f"Current Room Description: {current_room.get_description()} \n")
+
+print(current_room.show_items(), "\n")
 
 legitmate_moves = ['n', 's', 'e', 'w']
 
 # For parsing drop and take commands
-legitimate_actions = ['take', 'drop']
+legitimate_actions = ['take', 'get', 'drop']
 
 while player_action is not 'q':
  
@@ -108,16 +117,17 @@ while player_action is not 'q':
             print("ERROR: You can't go there! Illegitimate move.")
         
         # After movement choice, you will know where you currently are
-        print(f"You are now in {player_one.get_room().get_name()}\n")
+        print(f"\nYou are now in {player_one.get_room().get_name()}\n")
         print(f"Room Description: {current_room.description}\n")
-
-        if len(current_room.get_items())> 0:
-             print(current_room.show_items())
+        print(current_room.show_items())
+        
     elif player_action == 'i':
         print(player_one.get_items())
 
     elif player_action.split()[0] in legitimate_actions:
-        print("Taking or dropping?")
+        item_requested = player_action.split()[1]
+        player_one.pickup_item(current_room.on_take(item_requested))
+        print(player_one.get_items())
     
     elif player_action is not 'q':
         print("Not an acceptable input command")
