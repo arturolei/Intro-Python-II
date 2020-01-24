@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -34,6 +35,19 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+## Adding Items to Room
+initial_treasure_room_items = [
+    Item('t-shirt', 'It is a cheap shirt that says "Congratulations! You found the treasure room"'),
+    Item('flyer', "It's an awfully-designed informational flyer about the Treasure Room"),
+    Item('decal', "It's a decal advertising the Treasure Room")]
+
+initial_outside_items =[Item('pinecone', "It's a pinecone. Not very fresh."),
+    Item('brochure', "It's a brochure about the rooms; there is a map.")]
+
+room['treasure'].set_items(initial_treasure_room_items)
+room['outside'].set_items(initial_outside_items)
+
+
 #
 # Main
 #
@@ -62,37 +76,50 @@ print(f"Current Room Description: {current_room.description}")
 
 legitmate_moves = ['n', 's', 'e', 'w']
 
+# For parsing drop and take commands
+legitimate_actions = ['take', 'drop']
+
 while player_action is not 'q':
  
     player_action = input(f"What do you want to do, {player_one.name}? Or press q to quit. ")
     
-    if player_action in legitmate_moves:
+    if player_action in legitmate_moves and len(player_action.split()) != 2:
 
         if player_action == 'n' and current_room.n_to != None: # Test room is real and player direction
             player_one.set_room(current_room.n_to)
             current_room = player_one.get_room()
-            print(f"You are now in {player_one.get_room().get_name()}")
-            print(f"Room Description: {current_room.description}")
+           
 
         elif player_action == 's' and current_room.s_to != None:
             player_one.set_room(current_room.s_to)
             current_room = player_one.get_room()
-            print(f"You are now in {player_one.get_room().name}")
+       
         
         elif player_action == 'e' and current_room.e_to != None:
             player_one.set_room(current_room.e_to)
             current_room = player_one.get_room()
-            print(f"You are now in {player_one.get_room().name}")
+          
 
         elif player_action == 'w' and current_room.w_to != None:
             player_one.set_room(current_room.w_to)
             current_room = player_one.get_room()
-            print(f"You are now in {player_one.get_room().name}")
-        
+            
         else:
             print("ERROR: You can't go there! Illegitimate move.")
+        
+        # After movement choice, you will know where you currently are
+        print(f"You are now in {player_one.get_room().get_name()}\n")
+        print(f"Room Description: {current_room.description}\n")
+
+        if len(current_room.get_items())> 0:
+             print(current_room.get_items())
+
+    elif player_action.split()[0] in legitimate_actions:
+        print("Taking or dropping?")
+    
     elif player_action is not 'q':
         print("Not an acceptable input command")
+    
 
 # Print when out of loop and player has quit the game.
 print("Goodbye! Thanks for playing!")
