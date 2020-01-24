@@ -113,6 +113,8 @@ while player_action is not 'q':
 
         if len(current_room.get_items())> 0:
              print(current_room.get_items())
+    elif player_action == 'i':
+        print(f"Items currently carried by {player_one.name}")
 
     elif player_action.split()[0] in legitimate_actions:
         print("Taking or dropping?")
